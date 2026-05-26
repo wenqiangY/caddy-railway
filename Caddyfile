@@ -4,7 +4,7 @@
 
 :8080 {
 
-    handle_path /api/* {
+    handle /api/* {
         reverse_proxy api.railway.internal:4000
     }
 
