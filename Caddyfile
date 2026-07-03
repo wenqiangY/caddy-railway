@@ -5,11 +5,23 @@
 :8080 {
 
     handle /api/* {
-        reverse_proxy api.railway.internal:4000
+        reverse_proxy api.railway.internal:4000 {
+            transport http {
+                dial_timeout 30s
+                response_header_timeout 120s
+            }
+            request_timeout 120s
+        }
     }
 
     handle {
-        reverse_proxy web.railway.internal:8080
+        reverse_proxy web.railway.internal:8080 {
+            transport http {
+                dial_timeout 30s
+                response_header_timeout 120s
+            }
+            request_timeout 120s
+        }
     }
 
 }
