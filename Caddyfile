@@ -10,7 +10,6 @@
                 dial_timeout 30s
                 response_header_timeout 120s
             }
-            request_timeout 120s
         }
     }
 
@@ -20,7 +19,6 @@
                 dial_timeout 30s
                 response_header_timeout 120s
             }
-            request_timeout 120s
         }
     }
 
