@@ -1,7 +1,12 @@
-FROM nginx:latest
+FROM caddy:builder AS builder
 
-COPY nginx.conf /etc/nginx/nginx.conf
+ARG CADDY_PLUGINS=
 
-EXPOSE 8080
+COPY --chmod=755 build.sh /build.sh
+RUN sh /build.sh
 
-CMD ["nginx", "-g", "daemon off;"]
+FROM caddy:alpine
+
+COPY --from=builder /usr/local/bin/caddy-custom /usr/bin/caddy
+COPY ./www /www
+COPY ./Caddyfile /etc/caddy/Caddyfile
